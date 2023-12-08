@@ -1,0 +1,11 @@
+CREATE TABLE recipe_ingredients(
+    -> recipe_id INT NOT NULL,
+    -> seq_no INT NOT NULL,
+    -> ingredient_id INT NOT NULL,
+    -> measure_amount_id INT NOT NULL,
+    -> amount INT NOT NULL,
+    -> PRIMARY KEY (recipe_id, seq_no),
+    -> CONSTRAINT fk_measure_amount_id FOREIGN KEY(measure_amount_id) REFERENCES measurements (id),
+    -> CONSTRAINT fk_ingredient_id FOREIGN KEY (ingredient_id) REFERENCES ingredients (id)
+    -> );
+ERROR 1005 (HY000): Can't create table `sales_orders`.`recipe_ingredients` (errno: 121 "Duplicate key on write or update")
