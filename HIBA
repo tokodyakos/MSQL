@@ -1,0 +1,198 @@
+MariaDB [(none)]> CREATE DATABASE sales_orders;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> USE sales_orders;
+Database changed
+MariaDB [sales_orders]> CREATE TABLE ingredient_classes
+    -> ;
+ERROR 1113 (42000): A table must have at least 1 column
+MariaDB [sales_orders]> CREATE TABLE ingredient_classes(
+    -> id INT AUTO_INCREMENT,
+    -> name VARCHAR(50) NOT NULL,
+    -> description TEXT,
+    -> CONSTRAINT pk_sales_orders_id PRIMARY KEY(id),
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 6
+MariaDB [sales_orders]> CREATE TABLE ingredient_classes (
+    -> id INT AUTO_INCREMENT,
+    -> name VARCHAR(50) NOT NULL,
+    -> description TEXT,
+    -> CONSTRAINT pk_sales_orders_id PRIMARY KEY(id),
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 6
+MariaDB [sales_orders]> CREATE TABLE ingredient_classes(
+    -> id INT AUTO_INCREMENT,
+    -> name VARCHAR(50) NOT NULL,
+    -> description TEXT,
+    -> CONSTRAINT pk_sales_orders_id PRIMARY KEY(id),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 5
+MariaDB [sales_orders]> CREATE TABLE ingredient_classes(
+    -> id INT AUTO_INCREMENT,
+    -> name VARCHAR(50) NOT NULL,
+    -> description TEXT,
+    -> CONSTRAINT pk_sales_orders_id PRIMARY KEY(id),
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 6
+MariaDB [sales_orders]> CREATE TABLE ingredient_classes(
+    -> id INT AUTO_INCREMENT,
+    -> name VARCHAR(50) NOT NULL,
+    -> description TEXT,
+    -> CONSTRAINT pk_sales_orders_id PRIMARY KEY(id)
+    -> );
+Query OK, 0 rows affected, 1 warning (0.016 sec)
+
+MariaDB [sales_orders]> CREATE TABLE ingredients(
+    -> id INT AUTO_INCREMENT,
+    -> name VARCHAR(50) NOT NULL,
+    -> CONSTRAINT pk_ingredients_id PRIMARY KEY (id),
+    -> ));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '))' at line 5
+MariaDB [sales_orders]> CREATE TABLE ingredients(
+    -> id INT AUTO_INCREMENT,
+    -> name VARCHAR(50) NOT NULL,
+    -> PRIMARY KEY (id),
+    -> CONSTRAINT fk_ingredient_class_id FOREIGN KEY (ingredient_class_id) REFERENCES ingredient_classes (id) INT  NOT NULL
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'INT  NOT NULL
+)' at line 5
+MariaDB [sales_orders]> CREATE TABLE ingredients(
+    -> id INT AUTO_INCREMENT,
+    -> name VARCHAR(50) NOT NULL,
+    -> PRIMARY KEY (id),
+    -> CONSTRAINT fk_ingredient_class_id INT NOT NULl FOREIGN KEY (ingredient_class_id) REFERENCES ingredient_classes (id)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'INT NOT NULl FOREIGN KEY (ingredient_class_id) REFERENCES ingredient_classes ...' at line 5
+MariaDB [sales_orders]> CREATE TABLE ingredients(
+    -> id INT AUTO_INCREMENT,
+    -> name VARCHAR(50) NOT NULL,
+    -> PRIMARY KEY (id),
+    -> CONSTRAINT fk_ingredient_class_id FOREIGN KEY (ingredient_class_id) REFERENCES ingredient_classes (id) INT, NOT NULL
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'INT, NOT NULL
+)' at line 5
+MariaDB [sales_orders]> CREATE TABLE ingredients(
+    -> id INT AUTO_INCREMENT,
+    -> name VARCHAR(50) NOT NULL,
+    -> PRIMARY KEY (id),
+    -> ,
+    -> ,,
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '
+,,
+)' at line 5
+MariaDB [sales_orders]> CREATE TABLE ingredients(
+    -> id INT AUTO_INCREMENT,
+    -> name VARCHAR(50) NOT NULL,
+    -> CONSTRAINT pk_ingredients_id PRIMARY KEY (id),
+    -> ingredient_class_id INT NOT NULL,
+    -> CONSTRAINT fk_ingredient_class_id FOREIGN KEY (ingredient_class_id) REFERENCES ingredient_classes (id)
+    -> );
+Query OK, 0 rows affected, 1 warning (0.029 sec)
+
+MariaDB [sales_orders]> CREATE TABLE measurements(
+    -> id INT AUTO_INCREMENT,
+    -> name VARCHAR(50) NOT NULL,
+    -> description TEXT NOT NULL,
+    -> CONSTRAINT pk_measurements_id PRIMARY KEY (id),
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 6
+MariaDB [sales_orders]> CREATE TABLE measurements(
+    -> id INT AUTO_INCREMENT,
+    -> name VARCHAR(50) NOT NULL,
+    -> description TEXT NOT NULL,
+    -> CONSTRAINT pk_measurements_id PRIMARY KEY (id)
+    -> );
+Query OK, 0 rows affected, 1 warning (0.018 sec)
+
+MariaDB [sales_orders]> ALTER TABLE ingredients ADD COLUMN measure_amount_id INT NOT NULL;
+Query OK, 0 rows affected (0.019 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [sales_orders]> ALTER TABLE ingredients ADD COLUMN CONSTRAINT fk_measure_amount_id FOREGIN KEY (measure_amount_id) REFERENCES measurements (id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'CONSTRAINT fk_measure_amount_id FOREGIN KEY (measure_amount_id) REFERENCES me...' at line 1
+MariaDB [sales_orders]> USE measurements
+ERROR 1049 (42000): Unknown database 'measurements'
+MariaDB [sales_orders]> USE TABLE measurements
+ERROR 1049 (42000): Unknown database 'table'
+MariaDB [sales_orders]> DESCRIBE measurements
+    -> ;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| id          | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name        | varchar(50) | NO   |     | NULL    |                |
+| description | text        | NO   |     | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.022 sec)
+
+MariaDB [sales_orders]> DESCRIBE ingredients
+    -> ;
++---------------------+-------------+------+-----+---------+----------------+
+| Field               | Type        | Null | Key | Default | Extra          |
++---------------------+-------------+------+-----+---------+----------------+
+| id                  | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name                | varchar(50) | NO   |     | NULL    |                |
+| ingredient_class_id | int(11)     | NO   | MUL | NULL    |                |
+| measure_amount_id   | int(11)     | NO   |     | NULL    |                |
++---------------------+-------------+------+-----+---------+----------------+
+4 rows in set (0.022 sec)
+
+MariaDB [sales_orders]> ALTER TABLE ingredients ADD CONSTRAINT fk_measure_amount_id FOREIGN KEY (measure_amount_id) REFERENCES measurements (id);
+Query OK, 0 rows affected (0.051 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [sales_orders]> DESCRIBE ingredients;
++---------------------+-------------+------+-----+---------+----------------+
+| Field               | Type        | Null | Key | Default | Extra          |
++---------------------+-------------+------+-----+---------+----------------+
+| id                  | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name                | varchar(50) | NO   |     | NULL    |                |
+| ingredient_class_id | int(11)     | NO   | MUL | NULL    |                |
+| measure_amount_id   | int(11)     | NO   | MUL | NULL    |                |
++---------------------+-------------+------+-----+---------+----------------+
+4 rows in set (0.021 sec)
+
+MariaDB [sales_orders]> CREATE TABLE recipe_ingredients(
+    -> recipe_id INT NOT NULL,
+    -> seq_no INT NOT NULL,
+    -> ingredient_id INT NOT NULL,
+    -> measure_amount_id,
+    -> 999;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '
+999' at line 5
+MariaDB [sales_orders]> CREATE TABLE recipe_ingredients(
+    -> recipe_id INT NOT NULL,
+    -> seq_no INT NOT NULL,
+    -> ingredient_id INT NOT NULL,
+    -> measure_amount_id INT NOT NULL,
+    -> amount INT NOT NULL,
+    -> CONSTRAINT pk_recipe_ingredients_recipe_id PRIMARY KEY (recipe_id),
+    -> CONSTRAINT pk_recipe_ingredients_seq_no PRIMARY KEY (seq_no),
+    -> CONSTRAINT fk_measure_amount_id FOREIGN KEY(measure_amount_id) REFERENCES measurements (id)
+    -> ,
+    -> CONSTRAINT fk_ingredient_id FOREIGN KEY (ingredient_id) REFERENCES ingredients (id)
+    -> );
+ERROR 1068 (42000): Multiple primary key defined
+MariaDB [sales_orders]> CREATE TABLE recipe_ingredients(
+    -> recipe_id INT NOT NULL,
+    -> seq_no INT NOT NULL,
+    -> ingredient_id INT NOT NULL,
+    -> measure_amount_id INT NOT NULL,
+    -> amount INT NOT NULL,
+    -> CONSTRAINT pk_recipe_ingredients_recipe_id_seq_no PRIMARY KEY (recipe_id,seq_no),
+    -> CONSTRAINT fk_measure_amount_id FOREIGN KEY(measure_amount_id) REFERENCES measurements (id),
+    -> CONSTRAINT fk_ingredient_id FOREIGN KEY (ingredient_id) REFERENCES ingredients (id)
+    -> );
+ERROR 1005 (HY000): Can't create table `sales_orders`.`recipe_ingredients` (errno: 121 "Duplicate key on write or update")
+MariaDB [sales_orders]> CREATE TABLE recipe_ingredients(
+    -> recipe_id INT NOT NULL,
+    -> seq_no INT NOT NULL,
+    -> ingredient_id INT NOT NULL,
+    -> measure_amount_id INT NOT NULL,
+    -> amount INT NOT NULL,
+    -> PRIMARY KEY (recipe_id, seq_no),
+    -> CONSTRAINT fk_measure_amount_id FOREIGN KEY(measure_amount_id) REFERENCES measurements (id),
+    -> CONSTRAINT fk_ingredient_id FOREIGN KEY (ingredient_id) REFERENCES ingredients (id)
+    -> );
+ERROR 1005 (HY000): Can't create table `sales_orders`.`recipe_ingredients` (errno: 121 "Duplicate key on write or update")
